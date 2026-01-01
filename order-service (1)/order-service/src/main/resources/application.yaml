@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: order-service
+
+  datasource:
+    password: root@123
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+
+
+server:
+  port: 8081
+
+product:
+  service:
+    url: http://localhost:8080/api/products
+
+app:
+  kafka:
+    topic:
+      name: order_topic
